@@ -1,8 +1,8 @@
-let tableData = [{
-    "customerName": "",
-    "phoneNumber": "",
-    "customerEmail": "",
-    "customerID": ""
-}]
+// "customerName": "",
+// "phoneNumber": "",
+// "customerEmail": "",
+// "customerID": ""
+
+let tableData = [{}]
 
 module.exports = tableData;
