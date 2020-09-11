@@ -5,7 +5,7 @@ var fs = require("fs");
 app.use(express.static(path.join(__dirname, 'static')));
 
 var app = express();
-var PORT = 9000;
+var PORT = process.env.PORT || 9000;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
