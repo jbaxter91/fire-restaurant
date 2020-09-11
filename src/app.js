@@ -43,27 +43,29 @@ app.post("/", function (req, res) {
 // =================================
 
 // ========= DELETE Requests ========
-app.delete("/table", function (req, res) {
-    var customerID = req.body.customerID;
-    console.log("Trying to delete", customerID);
-    var removedList = tableData.filter( patron  => {
-        if(patron.customerID != customerID)
-        { 
-            return patron;
-        }
-    });
-
-    console.log(removedList);
-    tableData = removedList;
-    if(tableData.length < MAX_TABLES)
-    {
-        console.log("Before", waitingListData);
-        addTable(waitingListData.shift());
-        console.log("After", waitingListData);
+app.delete("/tables", function (req, res) {
+  var customerID = req.body.customerID;
+  console.log("Trying to delete", customerID);
+  var removedList = tableData.filter((patron) => {
+    console.log("PatronID: ", patron.customerID);
+    if (patron.customerID != customerID && patron.customerID) {
+      console.log("Returning");
+      return patron;
     }
-    res.send("All good");
   });
-// 
+
+  console.log(removedList);
+  tableData = removedList;
+  if (tableData.length < MAX_TABLES) {
+    var transfer = waitingListData.shift();
+    addTable(transfer);
+    console.log("======");
+    console.log("Table:", tableData);
+    console.log("Waitlist: ", waitingListData);
+  }
+  res.send("All good");
+});
+//
 
 app.listen(PORT, () => {
   console.log(`Listening on: http://localhost:${PORT}`);
