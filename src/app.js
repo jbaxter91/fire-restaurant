@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var fs = require("fs");
 
+app.use(express.static(path.join(__dirname, 'static')));
 
 var app = express();
 var PORT = 9000;
