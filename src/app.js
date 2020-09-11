@@ -5,7 +5,8 @@ const tableData = require("./static/tableData");
 const waitingListData = require("./static/waitingListData");
 const { table } = require("console");
 
-const NUM_TABLES = 5;
+const MAX_TABLES = 5;
+const MAX_WAITLIST = 20;
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -35,7 +36,7 @@ app.get("/table", (req, res) => {
 // ======== POST Requests ==========
 app.post("/api/add", function (req, res) {
   var message = req.body;
-  tableData.length <= NUM_TABLES ? addTable(message) : addWaitingList(message);
+  tableData.length <= MAX_TABLES ? addTable(message) : addWaitingList(message);
   res.send("All good");
 });
 // =================================
@@ -51,5 +52,7 @@ function addTable(data) {
 
 function addWaitingList(data) {
   console.log("Adding to Waitlist");
-  waitingListData.push(data);
+  if (waitingListData.length <= MAX_WAITLIST) {
+    waitingListData.push(data);
+  } else console.log("Can not add any more to waitlist, you hit your max!");
 }
