@@ -2,13 +2,7 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const tableData = require("./static/tableData");
-
-tableData.push({
-    "customerName": "Karen",
-    "phoneNumber": "8675309",
-    "customerEmail": "sds@555",
-    "customerID": "9654"
-})
+const waitingListData = require("./static/waitingListData");
 
 
 const app = express();
@@ -24,17 +18,21 @@ app.get("/api/tables",(req, res)=>{
 });
 
 app.get("/api/waitlist",(req, res)=>{
-    
+    res.send(waitingListData);
 });
 
 app.get("/reserve",(req, res)=>{
-    
+    res.sendFile(path.join(__dirname, 'reserve.html'));
 });
 
 app.get("/table",(req, res)=>{
-    
+    res.sendFile(path.join(__dirname, 'tables.html'))
 });
 // ==============================
+
+// ======== POST Requests ==========
+app.post("api/")
+// =================================
 
 app.listen(PORT, () => 
 {
