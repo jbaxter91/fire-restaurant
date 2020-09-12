@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-let tableData = require("./static/tableData");
-let waitingListData = require("./static/waitingListData");
+let tableData = require("./data/tableData");
+let waitingListData = require("./data/waitingListData");
 const { table } = require("console");
-const { filter } = require("./static/waitingListData");
+const { filter } = require("./data/waitingListData");
 
 const MAX_TABLES = 5;
 const MAX_WAITLIST = 20;
